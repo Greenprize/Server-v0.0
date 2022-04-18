@@ -7,11 +7,11 @@
      
     @foreach (var item in Model)
     {
-        <tr><td>@item.Id</td>
+        <tr><td>@item.OrderId</td>
             <td>
-                <a asp-action="Details" asp-controller="Orders" asp-route-id="@item.Id">Подробнее</a> |
-                <a asp-action="Edit" asp-controller="Orders" asp-route-id="@item.Id">Изменить</a> |
-                <a asp-action="Delete" asp-controller="Orders" asp-route-id="@item.Id">Удалить</a>
+                <a asp-action="Details" asp-controller="Orders" asp-route-id="@item.OrderId">Подробнее</a> |
+                <a asp-action="Edit" asp-controller="Orders" asp-route-id="@item.OrderId">Изменить</a> |
+                <a asp-action="Delete" asp-controller="Orders" asp-route-id="@item.OrderId">Удалить</a>
             </td></tr>
     }
 </table>

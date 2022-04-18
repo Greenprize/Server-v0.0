@@ -49,6 +49,9 @@ namespace Server_v0._0
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                    name: "MyArea",
+                    pattern: "{area:exists}/{controller=Orders}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Clients}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(

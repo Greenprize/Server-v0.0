@@ -42,7 +42,7 @@ namespace Server_v0._0.Controllers
         {
             if (id != null)
             {
-                Order user = await db.Orders.FirstOrDefaultAsync(p => p.Id == id);
+                Order user = await db.Orders.FirstOrDefaultAsync(p => p.OrderId == id);
                 if (user != null)
                     return View(user);
             }
@@ -54,7 +54,7 @@ namespace Server_v0._0.Controllers
         {
             if (id != null)
             {
-                Order user = await db.Orders.FirstOrDefaultAsync(p => p.Id == id);
+                Order user = await db.Orders.FirstOrDefaultAsync(p => p.OrderId == id);
                 if (user != null)
                     return View(user);
             }
@@ -75,7 +75,7 @@ namespace Server_v0._0.Controllers
         {
             if (id != null)
             {
-                Order user = await db.Orders.FirstOrDefaultAsync(p => p.Id == id);
+                Order user = await db.Orders.FirstOrDefaultAsync(p => p.OrderId == id);
                 if (user != null)
                     return View(user);
             }
@@ -87,7 +87,7 @@ namespace Server_v0._0.Controllers
         {
             if (id != null)
             {
-                Order user = new Order { Id = id.Value };
+                Order user = new Order { OrderId = id.Value };
                 db.Entry(user).State = EntityState.Deleted;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");

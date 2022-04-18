@@ -1,10 +1,10 @@
-﻿namespace Server_v0._0.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Server_v0._0.Models
 {
     public class Order
     {
-        public int Id { get; set;}
-        public double Price { get; set;}
-
-        public int ClientID { get; set; }
+        public int OrderId { get; set; }
+        public double Price { get; set; }
     }
 }

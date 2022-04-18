@@ -42,7 +42,7 @@ namespace Server_v0._0.Controllers
         {
             if (id != null)
             {
-                Client user = await db.Clients.FirstOrDefaultAsync(p => p.Id == id);
+                Client user = await db.Clients.FirstOrDefaultAsync(p => p.ClientId == id);
                 if (user != null)
                     return View(user);
             }
@@ -54,7 +54,7 @@ namespace Server_v0._0.Controllers
         {
             if (id != null)
             {
-                Client user = await db.Clients.FirstOrDefaultAsync(p => p.Id == id);
+                Client user = await db.Clients.FirstOrDefaultAsync(p => p.ClientId == id);
                 if (user != null)
                     return View(user);
             }
@@ -75,7 +75,7 @@ namespace Server_v0._0.Controllers
         {
             if (id != null)
             {
-                Client user = await db.Clients.FirstOrDefaultAsync(p => p.Id == id);
+                Client user = await db.Clients.FirstOrDefaultAsync(p => p.ClientId == id);
                 if (user != null)
                     return View(user);
             }
@@ -87,7 +87,7 @@ namespace Server_v0._0.Controllers
         {
             if (id != null)
             {
-                Client user = new Client { Id = id.Value };
+                Client user = new Client { ClientId = id.Value };
                 db.Entry(user).State = EntityState.Deleted;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");

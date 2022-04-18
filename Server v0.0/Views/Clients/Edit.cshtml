@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Редактирование пользователя";
 }
-<form asp-action="edit" asp-controller="clients" asp-route-id="@Model.Id">
+<form asp-action="edit" asp-controller="clients" asp-route-id="@Model.ClientId">
     <div class="form-group">
         <label asp-for="Name" class="control-label">Имя</label>
         <input type="text" asp-for="Name" class="form-control" />
