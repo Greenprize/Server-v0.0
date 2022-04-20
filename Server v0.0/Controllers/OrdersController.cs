@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Server_v0._0.Controllers
 {
@@ -27,6 +28,10 @@ namespace Server_v0._0.Controllers
         //создание элемента
         public IActionResult Create()
         {
+            var clients = db.Clients.AsNoTracking();
+
+            ViewBag.Clients = new SelectList(clients, nameof(Client.ClientId), nameof(Client.Name));
+            
             return View();
         }
         [HttpPost]
