@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace Server_v0._0.Models
 {
     public class Client

@@ -1,15 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Server_v0._0.Models;
 using System.Threading.Tasks;
 
 namespace Server_v0._0.Controllers
 {
-    public class OrdersController : Controller
+    public class ComputersController : Controller
     {
         private ApplicationContext db;
-        public OrdersController(ApplicationContext context)
+        public ComputersController(ApplicationContext context)
         {
             db = context;
         }
@@ -17,22 +16,18 @@ namespace Server_v0._0.Controllers
         //индексация
         public async Task<IActionResult> Index()
         {
-            return View(await db.Orders.ToListAsync());
+            return View(await db.Computers.ToListAsync());
         }
 
         //создание элемента
         public IActionResult Create()
         {
-            var clients = db.Clients.AsNoTracking();
-
-            ViewBag.Clients = new SelectList(clients, nameof(Client.ClientId), nameof(Client.Name));
-
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Create(Order user)
+        public async Task<IActionResult> Create(Computer user)
         {
-            db.Orders.Add(user);
+            db.Computers.Add(user);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
@@ -42,7 +37,7 @@ namespace Server_v0._0.Controllers
         {
             if (id != null)
             {
-                Order user = await db.Orders.FirstOrDefaultAsync(p => p.OrderId == id);
+                Computer user = await db.Computers.FirstOrDefaultAsync(p => p.ComputerId == id);
                 if (user != null)
                     return View(user);
             }
@@ -54,16 +49,16 @@ namespace Server_v0._0.Controllers
         {
             if (id != null)
             {
-                Order user = await db.Orders.FirstOrDefaultAsync(p => p.OrderId == id);
+                Computer user = await db.Computers.FirstOrDefaultAsync(p => p.ComputerId == id);
                 if (user != null)
                     return View(user);
             }
             return NotFound();
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(Order user)
+        public async Task<IActionResult> Edit(Computer user)
         {
-            db.Orders.Update(user);
+            db.Computers.Update(user);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
@@ -75,7 +70,7 @@ namespace Server_v0._0.Controllers
         {
             if (id != null)
             {
-                Order user = await db.Orders.FirstOrDefaultAsync(p => p.OrderId == id);
+                Computer user = await db.Computers.FirstOrDefaultAsync(p => p.ComputerId == id);
                 if (user != null)
                     return View(user);
             }
@@ -87,7 +82,7 @@ namespace Server_v0._0.Controllers
         {
             if (id != null)
             {
-                Order user = new Order { OrderId = id.Value };
+                Computer user = new Computer { ComputerId = id.Value };
                 db.Entry(user).State = EntityState.Deleted;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");

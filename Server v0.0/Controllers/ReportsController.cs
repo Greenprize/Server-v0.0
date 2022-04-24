@@ -1,15 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Server_v0._0.Models;
 using System.Threading.Tasks;
 
 namespace Server_v0._0.Controllers
 {
-    public class OrdersController : Controller
+    public class ReportsController : Controller
     {
         private ApplicationContext db;
-        public OrdersController(ApplicationContext context)
+        public ReportsController(ApplicationContext context)
         {
             db = context;
         }
@@ -17,22 +16,18 @@ namespace Server_v0._0.Controllers
         //индексация
         public async Task<IActionResult> Index()
         {
-            return View(await db.Orders.ToListAsync());
+            return View(await db.Reports.ToListAsync());
         }
 
         //создание элемента
         public IActionResult Create()
         {
-            var clients = db.Clients.AsNoTracking();
-
-            ViewBag.Clients = new SelectList(clients, nameof(Client.ClientId), nameof(Client.Name));
-
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Create(Order user)
+        public async Task<IActionResult> Create(Report user)
         {
-            db.Orders.Add(user);
+            db.Reports.Add(user);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
@@ -42,7 +37,7 @@ namespace Server_v0._0.Controllers
         {
             if (id != null)
             {
-                Order user = await db.Orders.FirstOrDefaultAsync(p => p.OrderId == id);
+                Report user = await db.Reports.FirstOrDefaultAsync(p => p.ReportId == id);
                 if (user != null)
                     return View(user);
             }
@@ -54,16 +49,16 @@ namespace Server_v0._0.Controllers
         {
             if (id != null)
             {
-                Order user = await db.Orders.FirstOrDefaultAsync(p => p.OrderId == id);
+                Report user = await db.Reports.FirstOrDefaultAsync(p => p.ReportId == id);
                 if (user != null)
                     return View(user);
             }
             return NotFound();
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(Order user)
+        public async Task<IActionResult> Edit(Report user)
         {
-            db.Orders.Update(user);
+            db.Reports.Update(user);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
@@ -75,7 +70,7 @@ namespace Server_v0._0.Controllers
         {
             if (id != null)
             {
-                Order user = await db.Orders.FirstOrDefaultAsync(p => p.OrderId == id);
+                Report user = await db.Reports.FirstOrDefaultAsync(p => p.ReportId == id);
                 if (user != null)
                     return View(user);
             }
@@ -87,7 +82,7 @@ namespace Server_v0._0.Controllers
         {
             if (id != null)
             {
-                Order user = new Order { OrderId = id.Value };
+                Report user = new Report { ReportId = id.Value };
                 db.Entry(user).State = EntityState.Deleted;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
