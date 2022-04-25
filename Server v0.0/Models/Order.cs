@@ -8,5 +8,6 @@ namespace Server_v0._0.Models
         public double Price { get; set; }
         public int ClientID { get; set; }
         public ICollection<ReportOrder> ReportOrders { get; set; }
+        public ICollection<ComputerOrder> ComputerOrders { get; set; }
     }
 }

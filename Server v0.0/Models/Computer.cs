@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Server_v0._0.Models
 {
     public class Computer
@@ -13,5 +15,6 @@ namespace Server_v0._0.Models
         public string SSD_Disk { get; set; }
         public string Body { get; set; }
         public string Price { get; set; }
+        public ICollection<ComputerOrder> ComputerOrders { get; set; }
     }
 }

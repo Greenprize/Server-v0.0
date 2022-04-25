@@ -1,18 +1,20 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
 namespace Server_v0._0.Models
 {
     public class ReportOrderConfiguration : IEntityTypeConfiguration<ReportOrder>
     {
-        public void Configure(IEntityTypeConfiguration<ReportOrder> builder)
+        public void Configure(EntityTypeBuilder<ReportOrder> builder)
         {
-            builder.HasKey(s => new { s.ClientId, s.ReportId });
+            builder.HasKey(s => new { s.OrderId, s.ReportId });
 
-            builder.HasOne(ss => ss.Client)
-                .WithMany(s => s.ReportOrder)
-                .HasForeignKey(ss => ss.ClientId);
+            builder.HasOne(ss => ss.Order)
+                .WithMany(s => s.ReportOrders)
+                .HasForeignKey(ss => ss.OrderId);
 
             builder.HasOne(ss => ss.Report)
-                .WithMany(s => s.ReportOrder)
+                .WithMany(s => s.ReportOrders)
                 .HasForeignKey(ss => ss.ReportId);
         }
     }
