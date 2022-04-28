@@ -83,8 +83,9 @@ namespace Server_v0._0.Controllers
         {
             if (id != null)
             {
-                Computer user = new Computer { ComputerId = id.Value };
-                db.Entry(user).State = EntityState.Deleted;
+                Computer user = await db.Computers.FirstOrDefaultAsync(p => p.ComputerId == id);
+                user.IsDeleted = !user.IsDeleted;
+                db.Computers.Update(user);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }

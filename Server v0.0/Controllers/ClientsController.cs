@@ -83,8 +83,9 @@ namespace Server_v0._0.Controllers
         {
             if (id != null)
             {
-                Client user = new Client { ClientId = id.Value };
-                db.Entry(user).State = EntityState.Deleted;
+                Client user = await db.Clients.FirstOrDefaultAsync(p => p.ClientId == id);
+                user.IsDeleted = !user.IsDeleted;
+                db.Clients.Update(user);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }

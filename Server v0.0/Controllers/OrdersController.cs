@@ -88,8 +88,9 @@ namespace Server_v0._0.Controllers
         {
             if (id != null)
             {
-                Order user = new Order { OrderId = id.Value };
-                db.Entry(user).State = EntityState.Deleted;
+                Order user = await db.Orders.FirstOrDefaultAsync(p => p.OrderId == id);
+                user.IsDeleted = !user.IsDeleted;
+                db.Orders.Update(user);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }

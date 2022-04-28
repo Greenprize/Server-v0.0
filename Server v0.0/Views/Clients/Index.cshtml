@@ -4,14 +4,13 @@
 }
 <a asp-action="Create">Добавить пользователя</a>
 <table class="table">
-     
     @foreach (var item in Model)
     {
-        <tr><td>@item.Name</td>
+        <tr style=@Delete.DelColor(@item.IsDeleted)><td>@item.Name</td>
             <td>
                 <a asp-action="Details" asp-controller="Clients" asp-route-id="@item.ClientId">Подробнее</a> |
                 <a asp-action="Edit" asp-controller="Clients" asp-route-id="@item.ClientId">Изменить</a> |
-                <a asp-action="Delete" asp-controller="Clients" asp-route-id="@item.ClientId">Удалить</a>
+                <a asp-action="Delete" asp-controller="Clients" asp-route-id="@item.ClientId">@Delete.DelStatus(@item.IsDeleted)</a>
             </td>
         </tr>
     }

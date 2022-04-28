@@ -9,8 +9,7 @@ namespace Server_v0._0.Models
         [StringLength(100)]
         public string Name { get; set; }
         public string Email { get; set; }
-        [Required]
-        [StringLength(15)]
         public string Phone { get; set; }
+        public bool IsDeleted { get; set; }=false;
     }
 }

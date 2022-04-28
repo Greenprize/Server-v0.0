@@ -7,11 +7,11 @@
      
     @foreach (var item in Model)
     {
-        <tr><td>@item.ReportId</td>
+        <tr style=@Delete.DelColor(@item.IsDeleted)><td>@item.ReportId</td>
             <td>
                 <a asp-action="Details" asp-controller="reports" asp-route-id="@item.ReportId">Подробнее</a> |
                 <a asp-action="Edit" asp-controller="reports" asp-route-id="@item.ReportId">Изменить</a> |
-                <a asp-action="Delete" asp-controller="reports" asp-route-id="@item.ReportId">Удалить</a>
+                <a asp-action="Delete" asp-controller="reports" asp-route-id="@item.ReportId">@Delete.DelStatus(@item.IsDeleted)</a>
             </td></tr>
     }
 </table>

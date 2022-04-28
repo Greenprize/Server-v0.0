@@ -83,8 +83,9 @@ namespace Server_v0._0.Controllers
         {
             if (id != null)
             {
-                Report user = new Report { ReportId = id.Value };
-                db.Entry(user).State = EntityState.Deleted;
+                Report user = await db.Reports.FirstOrDefaultAsync(p => p.ReportId == id);
+                user.IsDeleted = !user.IsDeleted;
+                db.Reports.Update(user);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
