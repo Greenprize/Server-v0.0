@@ -8,5 +8,6 @@ namespace Server_v0._0
         public Order Order { get; set; }
         public int ComputerId { get; set; }
         public Computer Computer { get; set; }
+        public int Count { get; set;}
     }
 }

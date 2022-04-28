@@ -56,8 +56,9 @@ namespace Server_v0._0.Controllers
             return NotFound();
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(Computer user)
+        public async Task<IActionResult> Edit(Computer user, int? id)
         {
+            user.ComputerId = (int)id;
             db.Computers.Update(user);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");

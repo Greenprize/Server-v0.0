@@ -56,8 +56,9 @@ namespace Server_v0._0.Controllers
             return NotFound();
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(Client user)
+        public async Task<IActionResult> Edit(Client user, int? id)
         {
+            user.ClientId = (int)id;
             db.Clients.Update(user);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
