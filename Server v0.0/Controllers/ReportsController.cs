@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace Server_v0._0.Controllers
 {
-    public class ClientsController : Controller
+    public class ReportsController : Controller
     {
         private ApplicationContext db;
-        public ClientsController(ApplicationContext context)
+        public ReportsController(ApplicationContext context)
         {
             db = context;
         }
@@ -16,7 +16,7 @@ namespace Server_v0._0.Controllers
         //индексация
         public async Task<IActionResult> Index()
         {
-            return View(await db.Clients.ToListAsync());
+            return View(await db.Reports.ToListAsync());
         }
 
         //создание элемента
@@ -25,9 +25,9 @@ namespace Server_v0._0.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Create(Client user)
+        public async Task<IActionResult> Create(Report user)
         {
-            db.Clients.Add(user);
+            db.Reports.Add(user);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
@@ -37,7 +37,7 @@ namespace Server_v0._0.Controllers
         {
             if (id != null)
             {
-                Client user = await db.Clients.FirstOrDefaultAsync(p => p.ClientId == id);
+                Report user = await db.Reports.FirstOrDefaultAsync(p => p.ReportId == id);
                 if (user != null)
                     return View(user);
             }
@@ -49,17 +49,17 @@ namespace Server_v0._0.Controllers
         {
             if (id != null)
             {
-                Client user = await db.Clients.FirstOrDefaultAsync(p => p.ClientId == id);
+                Report user = await db.Reports.FirstOrDefaultAsync(p => p.ReportId == id);
                 if (user != null)
                     return View(user);
             }
             return NotFound();
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(Client user, int? id)
+        public async Task<IActionResult> Edit(Report user, int? id)
         {
-            user.ClientId = (int)id;
-            db.Clients.Update(user);
+            user.ReportId = (int)id;
+            db.Reports.Update(user);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
@@ -71,7 +71,7 @@ namespace Server_v0._0.Controllers
         {
             if (id != null)
             {
-                Client user = await db.Clients.FirstOrDefaultAsync(p => p.ClientId == id);
+                Report user = await db.Reports.FirstOrDefaultAsync(p => p.ReportId == id);
                 if (user != null)
                     return View(user);
             }
@@ -83,7 +83,7 @@ namespace Server_v0._0.Controllers
         {
             if (id != null)
             {
-                Client user = new Client { ClientId = id.Value };
+                Report user = new Report { ReportId = id.Value };
                 db.Entry(user).State = EntityState.Deleted;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");

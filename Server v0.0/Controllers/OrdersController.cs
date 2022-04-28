@@ -1,13 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Server_v0._0.Models;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using Server_v0._0.Models;
+using System.Threading.Tasks;
 
 namespace Server_v0._0.Controllers
 {
@@ -31,7 +26,7 @@ namespace Server_v0._0.Controllers
             var clients = db.Clients.AsNoTracking();
 
             ViewBag.Clients = new SelectList(clients, nameof(Client.ClientId), nameof(Client.Name));
-            
+
             return View();
         }
         [HttpPost]
@@ -66,8 +61,9 @@ namespace Server_v0._0.Controllers
             return NotFound();
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(Order user)
+        public async Task<IActionResult> Edit(Order user, int? id)
         {
+            user.OrderId = (int)id;
             db.Orders.Update(user);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");

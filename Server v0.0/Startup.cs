@@ -1,12 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Server_v0._0.Models;
-using System.Diagnostics;
 
 namespace Server_v0._0
 {
@@ -21,9 +19,8 @@ namespace Server_v0._0
 
         public void ConfigureServices(IServiceCollection services)
         {
-            // получаем строку подключения из файла конфигурации
             string connection = Configuration.GetConnectionString("DefaultConnection");
-            // добавляем контекст ApplicationContext в качестве сервиса в приложение
+
             services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(connection));
             services.AddControllersWithViews();
         }
@@ -48,6 +45,7 @@ namespace Server_v0._0
 
             app.UseEndpoints(endpoints =>
             {
+                //endpoints.MapDefaultControllerRoute();
                 endpoints.MapControllerRoute(
                     name: "MyArea",
                     pattern: "{area:exists}/{controller=Orders}/{action=Index}/{id?}");
@@ -57,6 +55,15 @@ namespace Server_v0._0
                 endpoints.MapControllerRoute(
                     name: "MyArea",
                     pattern: "{controller=Orders}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "MyArea",
+                    pattern: "{controller=Statuses}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "MyArea",
+                    pattern: "{controller=Computers}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "MyArea",
+                    pattern: "{controller=Reports}/{action=Index}/{id?}");
             });
         }
     }

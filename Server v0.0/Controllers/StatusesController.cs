@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace Server_v0._0.Controllers
 {
-    public class ClientsController : Controller
+    public class StatusesController : Controller
     {
         private ApplicationContext db;
-        public ClientsController(ApplicationContext context)
+        public StatusesController(ApplicationContext context)
         {
             db = context;
         }
@@ -16,7 +16,7 @@ namespace Server_v0._0.Controllers
         //индексация
         public async Task<IActionResult> Index()
         {
-            return View(await db.Clients.ToListAsync());
+            return View(await db.Statuses.ToListAsync());
         }
 
         //создание элемента
@@ -25,9 +25,9 @@ namespace Server_v0._0.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Create(Client user)
+        public async Task<IActionResult> Create(Status user)
         {
-            db.Clients.Add(user);
+            db.Statuses.Add(user);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
@@ -37,7 +37,7 @@ namespace Server_v0._0.Controllers
         {
             if (id != null)
             {
-                Client user = await db.Clients.FirstOrDefaultAsync(p => p.ClientId == id);
+                Status user = await db.Statuses.FirstOrDefaultAsync(p => p.StatusId == id);
                 if (user != null)
                     return View(user);
             }
@@ -49,17 +49,17 @@ namespace Server_v0._0.Controllers
         {
             if (id != null)
             {
-                Client user = await db.Clients.FirstOrDefaultAsync(p => p.ClientId == id);
+                Status user = await db.Statuses.FirstOrDefaultAsync(p => p.StatusId == id);
                 if (user != null)
                     return View(user);
             }
             return NotFound();
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(Client user, int? id)
+        public async Task<IActionResult> Edit(Status user, int? id)
         {
-            user.ClientId = (int)id;
-            db.Clients.Update(user);
+            user.StatusId = (int)id;
+            db.Statuses.Update(user);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
@@ -71,7 +71,7 @@ namespace Server_v0._0.Controllers
         {
             if (id != null)
             {
-                Client user = await db.Clients.FirstOrDefaultAsync(p => p.ClientId == id);
+                Status user = await db.Statuses.FirstOrDefaultAsync(p => p.StatusId == id);
                 if (user != null)
                     return View(user);
             }
@@ -83,7 +83,7 @@ namespace Server_v0._0.Controllers
         {
             if (id != null)
             {
-                Client user = new Client { ClientId = id.Value };
+                Status user = new Status { StatusId = id.Value };
                 db.Entry(user).State = EntityState.Deleted;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
