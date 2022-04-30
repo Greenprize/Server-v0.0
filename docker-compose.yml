@@ -11,7 +11,18 @@ services:
     volumes:
       - mssqldata:/var/opt/mssql
       - ./database/backup:/var/opt/mssql/backup
-      
+  server:
+    build:
+        context: ./
+        dockerfile: ./Dockerfile
+    image: jskonst/lecture_sample
+    ports:
+      - 5000:80
+    depends_on:
+      - "mssql"
+    volumes:
+      - "./Server v0.0/appsettings.Docker.json:/app/appsettings.json"
+
 volumes:
   mssqldata:
     external: true

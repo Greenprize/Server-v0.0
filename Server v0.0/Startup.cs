@@ -36,7 +36,7 @@ namespace Server_v0._0
                 app.UseExceptionHandler("/Clients/Error");
                 app.UseHsts();
             }
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
