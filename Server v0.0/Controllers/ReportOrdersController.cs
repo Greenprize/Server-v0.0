@@ -37,7 +37,7 @@ namespace Server_v0._0.Controllers
             var reportOrder = await _context.ReportOrders
                 .Include(r => r.Order)
                 .Include(r => r.Report)
-                .FirstOrDefaultAsync(m => m.OrderId == id);
+                .FirstOrDefaultAsync(m => m.ReportOrderId == id);
             if (reportOrder == null)
             {
                 return NotFound();
@@ -59,7 +59,7 @@ namespace Server_v0._0.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,OrderId,ReportId")] ReportOrder reportOrder)
+        public async Task<IActionResult> Create([Bind("ReportOrderId,OrderId,ReportId")] ReportOrder reportOrder)
         {
             if (ModelState.IsValid)
             {
@@ -95,9 +95,9 @@ namespace Server_v0._0.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,OrderId,ReportId")] ReportOrder reportOrder)
+        public async Task<IActionResult> Edit(int id, [Bind("ReportOrderId,OrderId,ReportId")] ReportOrder reportOrder)
         {
-            if (id != reportOrder.OrderId)
+            if (id != reportOrder.ReportOrderId)
             {
                 return NotFound();
             }
@@ -111,7 +111,7 @@ namespace Server_v0._0.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ReportOrderExists(reportOrder.OrderId))
+                    if (!ReportOrderExists(reportOrder.ReportOrderId))
                     {
                         return NotFound();
                     }
@@ -138,7 +138,7 @@ namespace Server_v0._0.Controllers
             var reportOrder = await _context.ReportOrders
                 .Include(r => r.Order)
                 .Include(r => r.Report)
-                .FirstOrDefaultAsync(m => m.OrderId == id);
+                .FirstOrDefaultAsync(m => m.ReportOrderId == id);
             if (reportOrder == null)
             {
                 return NotFound();
@@ -160,7 +160,7 @@ namespace Server_v0._0.Controllers
 
         private bool ReportOrderExists(int id)
         {
-            return _context.ReportOrders.Any(e => e.OrderId == id);
+            return _context.ReportOrders.Any(e => e.ReportOrderId == id);
         }
     }
 }

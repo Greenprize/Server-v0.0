@@ -37,7 +37,7 @@ namespace Server_v0._0.Controllers
             var computerOrder = await _context.ComputerOrders
                 .Include(c => c.Computer)
                 .Include(c => c.Order)
-                .FirstOrDefaultAsync(m => m.OrderId == id);
+                .FirstOrDefaultAsync(m => m.ComputerOrderId == id);
             if (computerOrder == null)
             {
                 return NotFound();
@@ -59,7 +59,7 @@ namespace Server_v0._0.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,OrderId,ComputerId,Count")] ComputerOrder computerOrder)
+        public async Task<IActionResult> Create([Bind("ComputerOrderId,OrderId,ComputerId,Count")] ComputerOrder computerOrder)
         {
             if (ModelState.IsValid)
             {
@@ -95,9 +95,9 @@ namespace Server_v0._0.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,OrderId,ComputerId,Count")] ComputerOrder computerOrder)
+        public async Task<IActionResult> Edit(int id, [Bind("ComputerOrderId,OrderId,ComputerId,Count")] ComputerOrder computerOrder)
         {
-            if (id != computerOrder.OrderId)
+            if (id != computerOrder.ComputerOrderId)
             {
                 return NotFound();
             }
@@ -111,7 +111,7 @@ namespace Server_v0._0.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ComputerOrderExists(computerOrder.OrderId))
+                    if (!ComputerOrderExists(computerOrder.ComputerOrderId))
                     {
                         return NotFound();
                     }
@@ -138,7 +138,7 @@ namespace Server_v0._0.Controllers
             var computerOrder = await _context.ComputerOrders
                 .Include(c => c.Computer)
                 .Include(c => c.Order)
-                .FirstOrDefaultAsync(m => m.OrderId == id);
+                .FirstOrDefaultAsync(m => m.ComputerOrderId == id);
             if (computerOrder == null)
             {
                 return NotFound();
@@ -160,7 +160,7 @@ namespace Server_v0._0.Controllers
 
         private bool ComputerOrderExists(int id)
         {
-            return _context.ComputerOrders.Any(e => e.OrderId == id);
+            return _context.ComputerOrders.Any(e => e.ComputerOrderId == id);
         }
     }
 }

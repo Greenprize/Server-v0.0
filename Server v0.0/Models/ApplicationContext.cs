@@ -14,6 +14,9 @@
         {
             modelBuilder.ApplyConfiguration(new ReportOrderConfiguration());
             modelBuilder.ApplyConfiguration(new ComputerOrderConfiguration());
+            modelBuilder.Entity<Order>()
+                        .HasOne(p => p.Client)
+                        .WithMany(p => p.Orders);
         }
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base(options)

@@ -5,8 +5,7 @@ namespace Server_v0._0
 {
     public class ComputerOrder
     {
-        [Key]
-        public int Id { get; set; }
+        public int ComputerOrderId { get; set; }
         public int OrderId { get; set; }
         public Order Order { get; set; }
         public int ComputerId { get; set; }

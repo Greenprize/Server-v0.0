@@ -1,17 +1,89 @@
 ﻿@model IEnumerable<Server_v0._0.Models.Computer>
+
 @{
-    ViewBag.Title = "Все пользователи";
+    ViewData["Title"] = "Index";
 }
-<a asp-action="Create">Добавить компьютер</a>
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
 <table class="table">
-     
-    @foreach (var item in Model)
-    {
-        <tr><td>@item.ComputerId</td>
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CPU)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GraphicsCard)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RAM)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Motherboars)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PowerSupply)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HardDrive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SSD_Disk)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Body)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
             <td>
-                <a asp-action="Details" asp-controller="Computers" asp-route-id="@item.ComputerId">Подробнее</a> |
-                <a asp-action="Edit" asp-controller="Computers" asp-route-id="@item.ComputerId">Изменить</a> |
-                <a asp-action="Delete" asp-controller="Computers" asp-route-id="@item.ComputerId">Удалить</a>
-            </td></tr>
-    }
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CPU)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GraphicsCard)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RAM)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Motherboars)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PowerSupply)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HardDrive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SSD_Disk)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Body)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ComputerId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ComputerId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ComputerId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
 </table>

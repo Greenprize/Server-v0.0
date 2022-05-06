@@ -1,48 +1,81 @@
 ﻿@model Server_v0._0.Models.Computer
+
 @{
-    ViewBag.Title = "Удаление информации о компьютере";
+    ViewData["Title"] = "Delete";
 }
- 
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
 <div>
-    <dl class="dl-horizontal">
-        <dt>Название компьютера</dt>
-        <dd>
+    <h4>Computer</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Title)
         </dd>
-        <dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CPU)
+        </dt>
+        <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.CPU)
         </dd>
-        <dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GraphicsCard)
+        </dt>
+        <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.GraphicsCard)
         </dd>
-        <dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RAM)
+        </dt>
+        <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.RAM)
         </dd>
-        <dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Motherboars)
+        </dt>
+        <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Motherboars)
         </dd>
-        <dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PowerSupply)
+        </dt>
+        <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.PowerSupply)
         </dd>
-        <dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HardDrive)
+        </dt>
+        <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.HardDrive)
         </dd>
-        <dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SSD_Disk)
+        </dt>
+        <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.SSD_Disk)
         </dd>
-        <dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Body)
+        </dt>
+        <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Body)
         </dd>
-        <dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Price)
         </dd>
     </dl>
- 
-    <div>
-        <form asp-controller="Computers" asp-action="Delete" method="post">
-            <div class="form-group">
-                <input type="submit" class="btn btn-default" value="Удалить" />
-            </div>
-        </form>
-    </div>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="ComputerId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
 </div>

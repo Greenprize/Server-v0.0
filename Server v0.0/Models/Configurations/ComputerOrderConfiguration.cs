@@ -7,7 +7,7 @@ namespace Server_v0._0.Models
     {
         public void Configure(EntityTypeBuilder<ComputerOrder> builder)
         {
-            builder.HasKey(s => new { s.OrderId, s.ComputerId });
+            builder.HasKey(s => new {s.ComputerOrderId});
 
             builder.HasOne(ss => ss.Order)
                 .WithMany(s => s.ComputerOrders)

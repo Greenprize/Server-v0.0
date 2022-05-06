@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Server_v0._0.Models
@@ -12,5 +13,6 @@ namespace Server_v0._0.Models
         [Required]
         [StringLength(15)]
         public string Phone { get; set; }
+        public List<Order> Orders { get; set; }
     }
 }

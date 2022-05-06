@@ -1,17 +1,47 @@
 ﻿@model IEnumerable<Server_v0._0.Models.Report>
+
 @{
-    ViewBag.Title = "Все пользователи";
+    ViewData["Title"] = "Index";
 }
-<a asp-action="Create">Добавить отчёт</a>
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
 <table class="table">
-     
-    @foreach (var item in Model)
-    {
-        <tr><td>@item.ReportId</td>
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Link)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
             <td>
-                <a asp-action="Details" asp-controller="reports" asp-route-id="@item.ReportId">Подробнее</a> |
-                <a asp-action="Edit" asp-controller="reports" asp-route-id="@item.ReportId">Изменить</a> |
-                <a asp-action="Delete" asp-controller="reports" asp-route-id="@item.ReportId">Удалить</a>
-            </td></tr>
-    }
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Link)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ReportId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ReportId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ReportId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
 </table>

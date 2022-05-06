@@ -7,7 +7,7 @@ namespace Server_v0._0.Models
     {
         public void Configure(EntityTypeBuilder<ReportOrder> builder)
         {
-            builder.HasKey(s => new { s.OrderId, s.ReportId });
+            builder.HasKey(s => new {s.ReportOrderId});
 
             builder.HasOne(ss => ss.Order)
                 .WithMany(s => s.ReportOrders)
