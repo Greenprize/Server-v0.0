@@ -5,14 +5,17 @@
 <form asp-action="create" asp-controller="reports">
     <div class="form-group">
         <label asp-for="Date" class="control-label">Время отчёта</label>
+        <a style="color:red"> @Html.ValidationMessageFor(model => model.Date)</a>
         <input type="datetime-local" asp-for="Date" class="form-control" data-val="true" />
     </div>
     <div class="form-group">
         <label asp-for="Description" class="control-label">Описание</label>
+        <a style="color:red"> @Html.ValidationMessageFor(model => model.Description)</a>
         <input type="text" asp-for="Description" class="form-control" />
     </div>
     <div class="form-group">
         <label asp-for="Link" class="control-label">Link</label>
+        <a style="color:red"> @Html.ValidationMessageFor(model => model.Link)</a>
         <input type="text" asp-for="Link" class="form-control" />
     </div>
     <div class="form-group">

@@ -1,0 +1,13 @@
+﻿create trigger [dbo].[price_count_ins_upd]
+on [dbo].[ComputerOrders]
+after insert, update
+as
+update Orders
+set Price=((select Price from Computers
+where computerid=(select computerid from inserted))
++(select sum(convert(float,Price)) from Computers
+where computerid in (select computerid from ComputerOrders
+where orderid=(select orderid from inserted))))
+WHERE orderid = (SELECT orderid FROM inserted)
+
+ALTER TABLE [dbo].[ComputerOrders] ENABLE TRIGGER [price_count_ins_upd]

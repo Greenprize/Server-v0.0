@@ -27,6 +27,10 @@ namespace Server_v0._0.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Client user)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(user);
+            }
             db.Clients.Add(user);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
@@ -56,9 +60,14 @@ namespace Server_v0._0.Controllers
             return NotFound();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Client user, int? id)
         {
             user.ClientId = (int)id;
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(user);
+            }
             db.Clients.Update(user);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");

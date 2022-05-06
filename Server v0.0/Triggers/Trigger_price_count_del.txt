@@ -1,0 +1,12 @@
+﻿create trigger price_count_del
+on computerOrders
+after delete
+as
+update Orders
+set Price=(select sum(p) from (select (convert(float,price)*count) p from ComputerOrders
+join Computers on Computers.computerid=ComputerOrders.computerid
+where orderid=(select orderid from deleted))q)
+WHERE orderid =(SELECT orderid FROM deleted)
+
+select 'Удалён компьютер с номером ' + convert(varchar,computerid) + ' в количестве '+
+convert(varchar,Count) + ' из заказа с номером ' + convert(varchar,orderid) from deleted

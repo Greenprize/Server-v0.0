@@ -32,6 +32,10 @@ namespace Server_v0._0.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Order user)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(user);
+            }
             db.Orders.Add(user);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
@@ -64,6 +68,10 @@ namespace Server_v0._0.Controllers
         public async Task<IActionResult> Edit(Order user, int? id)
         {
             user.OrderId = (int)id;
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(user);
+            }
             db.Orders.Update(user);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");

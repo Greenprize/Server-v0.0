@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Server_v0._0.Models;
 using System.Threading.Tasks;
 
-namespace Server_v0._0.Controllers
+namespace Server_v0._0
 {
     public class ComputersController : Controller
     {
@@ -27,6 +27,10 @@ namespace Server_v0._0.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Computer user)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(user);
+            }
             db.Computers.Add(user);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
@@ -59,6 +63,10 @@ namespace Server_v0._0.Controllers
         public async Task<IActionResult> Edit(Computer user, int? id)
         {
             user.ComputerId = (int)id;
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(user);
+            }
             db.Computers.Update(user);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
@@ -90,6 +98,12 @@ namespace Server_v0._0.Controllers
                 return RedirectToAction("Index");
             }
             return NotFound();
+        }
+
+        public async Task<IActionResult> ChangePrice(int a)
+        {
+            await db.Database.ExecuteSqlCommandAsync($"exec change_price {a}");
+            return RedirectToAction("Index");
         }
     }
 }

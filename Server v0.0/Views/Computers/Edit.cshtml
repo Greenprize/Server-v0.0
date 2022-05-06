@@ -5,42 +5,52 @@
 <form asp-action="edit" asp-controller="computers" asp-route-id="@Model.ComputerId">
     <div class="form-group">
         <label asp-for="Title" class="control-label">Название компьютера</label>
+        <a style="color:red"> @Html.ValidationMessageFor(model => model.Title)</a>
         <input type="text" asp-for="Title" class="form-control" />
     </div>
     <div class="form-group">
         <label asp-for="CPU" class="control-label">Название процессора</label>
+        <a style="color:red"> @Html.ValidationMessageFor(model => model.CPU)</a>
         <input type="text" asp-for="CPU" class="form-control" />
     </div>
     <div class="form-group">
         <label asp-for="GraphicsCard" class="control-label">Название видеокарты</label>
+        <a style="color:red"> @Html.ValidationMessageFor(model => model.GraphicsCard)</a>
         <input type="text" asp-for="GraphicsCard" class="form-control" />
     </div>
     <div class="form-group">
         <label asp-for="RAM" class="control-label">Название оперативной памяти</label>
+        <a style="color:red"> @Html.ValidationMessageFor(model => model.RAM)</a>
         <input type="text" asp-for="RAM" class="form-control" />
     </div>
     <div class="form-group">
         <label asp-for="Motherboars" class="control-label">Название материнской платы</label>
+        <a style="color:red"> @Html.ValidationMessageFor(model => model.Motherboars)</a>
         <input type="text" asp-for="Motherboars" class="form-control" />
     </div>
     <div class="form-group">
         <label asp-for="PowerSupply" class="control-label">Название блока питания</label>
-        <input type="text" asp-for="PowerSupply" PowerSupply="form-control" />
+        <a style="color:red"> @Html.ValidationMessageFor(model => model.PowerSupply)</a>
+        <input type="text" asp-for="PowerSupply" class="form-control" />
     </div>
     <div class="form-group">
         <label asp-for="HardDrive" class="control-label">Название жёсткого диска</label>
+        <a style="color:red"> @Html.ValidationMessageFor(model => model.HardDrive)</a>
         <input type="text" asp-for="HardDrive" class="form-control" />
     </div>
     <div class="form-group">
         <label asp-for="SSD_Disk" class="control-label">Название SSD диска</label>
+        <a style="color:red"> @Html.ValidationMessageFor(model => model.SSD_Disk)</a>
         <input type="text" asp-for="SSD_Disk" class="form-control" />
     </div>
     <div class="form-group">
         <label asp-for="Body" class="control-label">Название корпуса компьютера</label>
+        <a style="color:red"> @Html.ValidationMessageFor(model => model.Body)</a>
         <input type="text" asp-for="Body" class="form-control" />
     </div>
     <div class="form-group">
         <label asp-for="Price" class="control-label">Цена</label>
+        <a style="color:red"> @Html.ValidationMessageFor(model => model.Price)</a>
         <input type="number" asp-for="Price" class="form-control" />
     </div>
     <div class="form-group">

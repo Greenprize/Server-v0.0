@@ -27,6 +27,10 @@ namespace Server_v0._0.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Status user)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(user);
+            }
             db.Statuses.Add(user);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
@@ -59,6 +63,10 @@ namespace Server_v0._0.Controllers
         public async Task<IActionResult> Edit(Status user, int? id)
         {
             user.StatusId = (int)id;
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(user);
+            }
             db.Statuses.Update(user);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");

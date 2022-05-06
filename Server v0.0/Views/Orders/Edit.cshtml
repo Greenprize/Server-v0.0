@@ -5,7 +5,8 @@
 <form asp-action="edit" asp-controller="Orders" asp-route-id="@Model.OrderId">
     <div class="form-group">
         <label asp-for="Price" class="control-label">Цена заказа</label>
-        <input type="number" asp-for="Price" class="form-control" />
+        <a style="color:red"> @Html.ValidationMessageFor(model => model.Price)</a>
+        <input type="number" asp-for="Price" class="form-control"/>
     </div>
     <div class="form-group">
         <input type="submit" value="Сохранить" class="btn btn-default" />

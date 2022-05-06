@@ -5,8 +5,10 @@
 <form asp-action="create" asp-controller="Orders">
     <div class="form-group">
         <label asp-for="Price" class="control-label">Цена заказа</label>
+        <a style="color:red"> @Html.ValidationMessageFor(model => model.Price)</a>
         <input type="number" asp-for="Price" class="form-control"/>
         <label asp-for="ClientID" class="control-label">Клиент</label>
+        <a style="color:red"> @Html.ValidationMessageFor(model => model.ClientID)</a>
         <select asp-for="ClientID" asp-items="ViewBag.Clients">
             <option>Please select one</option>
         </select>
