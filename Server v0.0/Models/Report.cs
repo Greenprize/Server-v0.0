@@ -6,13 +6,13 @@ namespace Server_v0._0.Models
     public class Report
     {
         public int ReportId { get; set; }
-        [Required(ErrorMessage = "Данное поле обязательно к заполнению")]
+        [Required(ErrorMessage = "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public string Date { get; set; }
-        [StringLength(1000, ErrorMessage = "Описание не должно превышать 1000 символов")]
+        [StringLength(1000, ErrorMessage = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 1000 пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ")]
         public string Description { get; set; }
-        [StringLength(100, ErrorMessage = "Ссылка не должна превышать 100 символов")]
+        [StringLength(100, ErrorMessage = "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 100 пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ")]
         public string Link { get; set; }
         public bool IsDeleted { get; set; } = false;
         public ICollection<ReportOrder> ReportOrders { get; set; }
