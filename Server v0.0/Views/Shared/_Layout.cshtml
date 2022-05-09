@@ -38,7 +38,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="ReportOrders" asp-action="Index">Отчёт-Заказ</a>
                         </li>
-                    </ul>
+                    </ul>    
                 </div>
             </div>
         </nav>
@@ -51,6 +51,9 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
+            <a class="form-group"  asp-controller="Delete" asp-action="AllDelete" >
+                <input type="submit" value="Delete All" class="btn btn-primary" />
+            </a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

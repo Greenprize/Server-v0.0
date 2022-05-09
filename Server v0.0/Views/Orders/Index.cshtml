@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Orders</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -18,12 +18,15 @@
             <th>
                 @Html.DisplayNameFor(model => model.Client)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+        <tr style=@Delete.DelColor(@item.IsDeleted)>
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
@@ -31,9 +34,12 @@
                 @Html.DisplayFor(modelItem => item.Client.Name)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.Status.Title)
+            </td>
+            <td>
                 <a asp-action="Edit" asp-route-id="@item.OrderId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.OrderId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.OrderId">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.OrderId">@Delete.DelStatus(@item.IsDeleted)</a>
             </td>
         </tr>
 }

@@ -152,7 +152,7 @@ namespace Server_v0._0.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var computerOrder = await _context.ComputerOrders.FindAsync(id);
+            var computerOrder = await _context.ComputerOrders.FirstOrDefaultAsync(m => m.ComputerOrderId == id);
             _context.ComputerOrders.Remove(computerOrder);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

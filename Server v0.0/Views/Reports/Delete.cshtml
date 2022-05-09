@@ -1,12 +1,12 @@
 ﻿@model Server_v0._0.Models.Report
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = @Delete.DelStatus(@Model.IsDeleted);
 }
 
-<h1>Delete</h1>
+<h1>@Delete.DelStatus(@Model.IsDeleted)</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Are you sure you want to @Delete.DelStatus(@Model.IsDeleted) this?</h3>
 <div>
     <h4>Report</h4>
     <hr />
@@ -33,7 +33,7 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="ReportId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <input type="submit" value=@Delete.DelStatus(@Model.IsDeleted) class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>
 </div>

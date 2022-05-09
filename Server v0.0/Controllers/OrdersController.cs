@@ -21,7 +21,7 @@ namespace Server_v0._0.Controllers
         // GET: Orders
         public async Task<IActionResult> Index()
         {
-            var applicationContext = _context.Orders.Include(o => o.Client);
+            var applicationContext = _context.Orders.Include(o => o.Client).Include(o => o.Status);
             return View(await applicationContext.ToListAsync());
         }
 
@@ -35,6 +35,7 @@ namespace Server_v0._0.Controllers
 
             var order = await _context.Orders
                 .Include(o => o.Client)
+                .Include(o => o.Status)
                 .FirstOrDefaultAsync(m => m.OrderId == id);
             if (order == null)
             {
@@ -48,6 +49,7 @@ namespace Server_v0._0.Controllers
         public IActionResult Create()
         {
             ViewData["ClientId"] = new SelectList(_context.Clients, "ClientId", "Name");
+            ViewData["StatusId"] = new SelectList(_context.Statuses, "StatusId", "Title");
             return View();
         }
 
@@ -56,7 +58,7 @@ namespace Server_v0._0.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("OrderId,Price,ClientId")] Order order)
+        public async Task<IActionResult> Create([Bind("OrderId,Price,ClientId,StatusId")] Order order)
         {
             if (ModelState.IsValid)
             {
@@ -65,6 +67,7 @@ namespace Server_v0._0.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ClientId"] = new SelectList(_context.Clients, "ClientId", "Name", order.ClientId);
+            ViewData["StatusId"] = new SelectList(_context.Statuses, "StatusId", "Title", order.StatusId);
             return View(order);
         }
 
@@ -82,6 +85,7 @@ namespace Server_v0._0.Controllers
                 return NotFound();
             }
             ViewData["ClientId"] = new SelectList(_context.Clients, "ClientId", "Name", order.ClientId);
+            ViewData["StatusId"] = new SelectList(_context.Statuses, "StatusId", "Title", order.StatusId);
             return View(order);
         }
 
@@ -90,7 +94,7 @@ namespace Server_v0._0.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("OrderId,Price,ClientId")] Order order)
+        public async Task<IActionResult> Edit(int id, [Bind("OrderId,Price,ClientId,StatusId")] Order order)
         {
             if (id != order.OrderId)
             {
@@ -118,6 +122,7 @@ namespace Server_v0._0.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ClientId"] = new SelectList(_context.Clients, "ClientId", "Name", order.ClientId);
+            ViewData["StatusId"] = new SelectList(_context.Statuses, "StatusId", "Title", order.StatusId);
             return View(order);
         }
 
@@ -131,6 +136,7 @@ namespace Server_v0._0.Controllers
 
             var order = await _context.Orders
                 .Include(o => o.Client)
+                .Include(o => o.Status)
                 .FirstOrDefaultAsync(m => m.OrderId == id);
             if (order == null)
             {
@@ -146,7 +152,8 @@ namespace Server_v0._0.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var order = await _context.Orders.FindAsync(id);
-            _context.Orders.Remove(order);
+            order.IsDeleted = !order.IsDeleted;
+            _context.Orders.Update(order);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
