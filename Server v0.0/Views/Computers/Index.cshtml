@@ -4,10 +4,21 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Computers</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
+    <form asp-action="ChangePrice" method="post">
+        <div style="display: flex;align-items: center;text-align: center;">
+            <a style="display: flex;align-items: center;text-align: center;padding:5px" class="form-group">
+                <label style="padding:5px" class="control-label">Percent</label>
+                <input style="max-width:100px" name="percent" class="form-control" />
+            </a>
+            <a class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </a>
+            </div>
+        </form>
 </p>
 <table class="table">
     <thead>
@@ -25,7 +36,7 @@
                 @Html.DisplayNameFor(model => model.RAM)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Motherboars)
+                @Html.DisplayNameFor(model => model.Motherboard)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.PowerSupply)
@@ -47,7 +58,7 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+        <tr style=@Delete.DelColor(@item.IsDeleted)>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
@@ -61,7 +72,7 @@
                 @Html.DisplayFor(modelItem => item.RAM)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Motherboars)
+                @Html.DisplayFor(modelItem => item.Motherboard)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PowerSupply)
@@ -81,7 +92,7 @@
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ComputerId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.ComputerId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ComputerId">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.ComputerId">@Delete.DelStatus(@item.IsDeleted)</a>
             </td>
         </tr>
 }

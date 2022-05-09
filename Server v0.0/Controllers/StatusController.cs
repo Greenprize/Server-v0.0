@@ -139,7 +139,8 @@ namespace Server_v0._0.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var status = await _context.Statuses.FindAsync(id);
-            _context.Statuses.Remove(status);
+            status.IsDeleted = !status.IsDeleted;
+            _context.Statuses.Update(status);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

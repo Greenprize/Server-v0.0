@@ -53,7 +53,7 @@ namespace Server_v0._0.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ComputerId,Title,CPU,GraphicsCard,RAM,Motherboars,PowerSupply,HardDrive,SSD_Disk,Body,Price")] Computer computer)
+        public async Task<IActionResult> Create([Bind("ComputerId,Title,CPU,GraphicsCard,RAM,Motherboard,PowerSupply,HardDrive,SSD_Disk,Body,Price")] Computer computer)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace Server_v0._0.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ComputerId,Title,CPU,GraphicsCard,RAM,Motherboars,PowerSupply,HardDrive,SSD_Disk,Body,Price")] Computer computer)
+        public async Task<IActionResult> Edit(int id, [Bind("ComputerId,Title,CPU,GraphicsCard,RAM,Motherboard,PowerSupply,HardDrive,SSD_Disk,Body,Price")] Computer computer)
         {
             if (id != computer.ComputerId)
             {
@@ -139,7 +139,8 @@ namespace Server_v0._0.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var computer = await _context.Computers.FindAsync(id);
-            _context.Computers.Remove(computer);
+            computer.IsDeleted = !computer.IsDeleted;
+            _context.Computers.Update(computer);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
@@ -147,6 +148,13 @@ namespace Server_v0._0.Controllers
         private bool ComputerExists(int id)
         {
             return _context.Computers.Any(e => e.ComputerId == id);
+        }
+        [HttpPost]
+        public async Task<IActionResult> ChangePrice(int percent)
+        {
+            _ = _context.Database.ExecuteSqlRawAsync($"exec change_price {percent}");
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
     }
 }

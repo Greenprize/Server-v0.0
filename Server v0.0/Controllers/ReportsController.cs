@@ -139,7 +139,8 @@ namespace Server_v0._0.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var report = await _context.Reports.FindAsync(id);
-            _context.Reports.Remove(report);
+            report.IsDeleted = !report.IsDeleted;
+            _context.Reports.Update(report);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

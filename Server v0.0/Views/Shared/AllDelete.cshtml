@@ -1,0 +1,17 @@
+﻿@model Server_v0._0.Models.Delete
+
+@{
+    ViewData["Title"] = "Delete All";
+}
+
+<h1>Delete All</h1>
+
+<h3>Are you sure you want to Delete All this?</h3>
+<div>
+    <hr />
+    
+    <form asp-action="AllDelete">
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-controller="Clients" asp-action="Index">Back to List</a>
+    </form>
+</div>
