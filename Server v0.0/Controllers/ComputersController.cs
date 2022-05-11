@@ -156,11 +156,5 @@ namespace Server_v0._0
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
-        public async Task<IActionResult> ChangePrice(int a)
-        {
-            await db.Database.ExecuteSqlCommandAsync($"exec change_price {a}");
-            return RedirectToAction("Index");
-        }
     }
 }

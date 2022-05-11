@@ -6,9 +6,9 @@ namespace Server_v0._0.Models
     public class Order
     {
         public int OrderId { get; set; }
-        [Range(0, 1000000000, ErrorMessage = "Цена не может быть отрицательной")]
+        [Range(0, 1000000000, ErrorMessage = "The price cannot be negative")]
         public double Price { get; set; }
-        [Required(ErrorMessage = "Данное поле обязательно к заполнению")]
+        [Required]
         public int ClientId { get; set; }
         public int StatusId { get; set; }
         public bool IsDeleted { get; set; } = false;
