@@ -3,19 +3,19 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Server_v0._0.Models
 {
-    public class ComputerOrderConfiguration : IEntityTypeConfiguration<ComputerOrder>
+    public class ComputerOrderConfiguration : IEntityTypeConfiguration<ProductMaterial>
     {
-        public void Configure(EntityTypeBuilder<ComputerOrder> builder)
+        public void Configure(EntityTypeBuilder<ProductMaterial> builder)
         {
-            builder.HasKey(s => new {s.ComputerOrderId});
+            builder.HasKey(s => new {s.ProductMaterialId });
 
-            builder.HasOne(ss => ss.Order)
-                .WithMany(s => s.ComputerOrders)
-                .HasForeignKey(ss => ss.OrderId);
+            builder.HasOne(ss => ss.Product)
+                .WithMany(s => s.ProductMaterials)
+                .HasForeignKey(ss => ss.ProductId);
 
-            builder.HasOne(ss => ss.Computer)
-                .WithMany(s => s.ComputerOrders)
-                .HasForeignKey(ss => ss.ComputerId);
+            builder.HasOne(ss => ss.Material)
+                .WithMany(s => s.ProductMaterials)
+                .HasForeignKey(ss => ss.MaterialId);
         }
     }
 }

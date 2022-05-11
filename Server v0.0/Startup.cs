@@ -47,23 +47,26 @@ namespace Server_v0._0
             {
                 //endpoints.MapDefaultControllerRoute();
                 endpoints.MapControllerRoute(
-                    name: "MyArea",
-                    pattern: "{area:exists}/{controller=Orders}/{action=Index}/{id?}");
-                endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Clients}/{action=Index}/{id?}");
+                    pattern: "{controller=ProductTypes}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
                     name: "MyArea",
-                    pattern: "{controller=Orders}/{action=Index}/{id?}");
+                    pattern: "{area:exists}/{controller=Products}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
                     name: "MyArea",
-                    pattern: "{controller=Statuses}/{action=Index}/{id?}");
+                    pattern: "{controller=Materials}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
                     name: "MyArea",
-                    pattern: "{controller=Computers}/{action=Index}/{id?}");
+                    pattern: "{controller=ProductMaterials}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
                     name: "MyArea",
-                    pattern: "{controller=Reports}/{action=Index}/{id?}");
+                    pattern: "{controller=Discounts}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "MyArea",
+                    pattern: "{controller=Customers}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "MyArea",
+                    pattern: "{controller=Sales}/{action=Index}/{id?}");
             });
         }
     }
